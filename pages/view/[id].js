@@ -1,3 +1,4 @@
+import Car from "../../components/Car";
 import Layout from "../../components/Layout";
 
 export const getServerSideProps = async (context) => {
@@ -19,8 +20,7 @@ const View = ({ car }) => {
     <Layout title={"View car information"}>
       <h1>View car information</h1>
 
-      <div>car id - {car.id}</div>
-      <div>car name - {car.name}</div>
+      <Car car={car} action={"view"} />
     </Layout>
   );
 };
