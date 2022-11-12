@@ -15,7 +15,7 @@ const Layout = ({ children, title }) => {
       <Header />
 
       <Container>
-        <Row className="mt-3 text-center">
+        <Row className="mt-3 text-center pb-4">
           <Col>
             <main>{children}</main>
           </Col>
