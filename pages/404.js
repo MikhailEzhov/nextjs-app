@@ -7,7 +7,7 @@ const Error = () => {
       <h1>Error 404</h1>
 
       <Link href={"/"} legacyBehavior>
-        <a>back to home page</a>
+        <a>go to home page</a>
       </Link>
     </Layout>
   );
