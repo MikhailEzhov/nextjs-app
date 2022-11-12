@@ -9,7 +9,7 @@ const Layout = ({ children, title }) => {
         {title && <title>{title}</title>}
         <meta name="keywords" content="nextjs,react,redux" />
         <meta name="description" content="app created with next.js" />
-        <meta charset="utf-8" />
+        <meta charSet="utf-8" />
       </Head>
 
       <Header />
