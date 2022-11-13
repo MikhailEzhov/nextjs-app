@@ -15,8 +15,9 @@ const Car = ({ car, action }) => {
         <ListGroup.Item>price: {car.price}</ListGroup.Item>
       </ListGroup>
 
-      {car.technical_characteristics && (
+      {car.technical_characteristics.brand && (
         <ListGroup className="list-group-flush">
+          <i>Technical characteristics:</i>
           <ListGroup.Item>
             brand: {car.technical_characteristics.brand}
           </ListGroup.Item>
@@ -32,6 +33,17 @@ const Car = ({ car, action }) => {
           <ListGroup.Item>
             mileage: {car.technical_characteristics.mileage}
           </ListGroup.Item>
+        </ListGroup>
+      )}
+
+      {car.options.length > 0 && (
+        <ListGroup className="list-group-flush">
+          <i>Options:</i>
+          {car.options.map((option, index) => {
+            return (
+              <ListGroup.Item key={index}>{option.option_name}</ListGroup.Item>
+            );
+          })}
         </ListGroup>
       )}
 
