@@ -12,7 +12,7 @@ export const cars = [
       brand: "Volvo",
       model: "XC70",
       productionYear: 2007,
-      body: "body",
+      body: "body1",
       mileage: 200000,
     },
     options: [
@@ -35,6 +35,15 @@ export const cars = [
     description: "в отличном состоянии. Пробег 100000 км.",
     price: 1300000,
     contacts: "mazda@mail.ru",
+    technical_characteristics: {
+      car_id: 202,
+      brand: "Mazda",
+      model: "CX5",
+      productionYear: 2005,
+      body: "body2",
+      mileage: 100000,
+    },
+    options: [],
   },
   {
     id: 3,
@@ -46,22 +55,12 @@ export const cars = [
     contacts: "bmw@mail.ru",
     technical_characteristics: {
       car_id: 303,
-      brand: "BMW",
-      model: "X5",
-      productionYear: 2015,
-      body: "body",
-      mileage: 90000,
+      brand: "",
+      model: "",
+      productionYear: 0,
+      body: "",
+      mileage: 0,
     },
-    options: [
-      {
-        option_name: "кондиционер",
-      },
-      {
-        option_name: "подушки безопасности",
-      },
-      {
-        option_name: "другая",
-      },
-    ],
+    options: [],
   },
 ];
