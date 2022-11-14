@@ -9,7 +9,7 @@ export default function handler(request, response) {
 
   if (method === "POST") {
     const { body } = request;
-    cars.push({ ...body, id: cars.length + 1 });
-    return response.status(200).json(cars);
+    const newCars = cars.push(body);
+    return response.status(200).json(newCars);
   }
 }
