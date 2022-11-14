@@ -3,21 +3,7 @@ import * as types from "./types";
 
 const initialCarsState = {
   cars: [],
-  car: {
-    image: "",
-    name: "",
-    description: "",
-    price: 0,
-    contacts: "",
-    technical_characteristics: {
-      brand: "",
-      model: "",
-      productionYear: 0,
-      body: "",
-      mileage: 0,
-    },
-    options: [],
-  },
+  car: {},
   loading: true,
   error: null,
 };
@@ -41,21 +27,7 @@ const carsReducer = (state = initialCarsState, action) => {
           ...state,
           loading: false,
           error: action.payload,
-          car: {
-            image: "",
-            name: "",
-            description: "",
-            price: 0,
-            contacts: "",
-            technical_characteristics: {
-              brand: "",
-              model: "",
-              productionYear: 0,
-              body: "",
-              mileage: 0,
-            },
-            options: [],
-          },
+          car: {},
         };
       } else {
         return { ...state, loading: false, car: action.payload, error: false };
