@@ -2,12 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Table } from "react-bootstrap";
 
-const MyTable = ({ cars, variant }) => {
+const MyTable = ({ cars, variant, children }) => {
   if (variant === "search") {
     return (
       <Table responsive>
+        {children}
         <tbody>
-          {cars.map(({ id, image, technical_characteristics }) => (
+          {cars.map(({ id, image, price, technical_characteristics }) => (
             <tr key={id} className="align-middle">
               <td>
                 <Image
@@ -18,6 +19,7 @@ const MyTable = ({ cars, variant }) => {
                   style={{ objectFit: "cover" }}
                 />
               </td>
+              <td>{price}</td>
               <td>{technical_characteristics?.brand}</td>
               <td>{technical_characteristics?.model}</td>
               <td>{technical_characteristics?.productionYear}</td>
