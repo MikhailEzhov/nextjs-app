@@ -16,7 +16,7 @@ const MyTable = ({ cars, variant, children }) => {
                   alt={image}
                   width={70}
                   height={70}
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: "cover", borderRadius: "4px" }}
                 />
               </td>
               <td>{price}</td>
@@ -64,7 +64,7 @@ const MyTable = ({ cars, variant, children }) => {
                 alt={image}
                 width={70}
                 height={70}
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "cover", borderRadius: "4px" }}
               />
             </td>
             <td>{name}</td>
