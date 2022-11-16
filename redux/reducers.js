@@ -27,16 +27,20 @@ const carsReducer = (state = initialCarsState, action) => {
     case types.GET_CARS:
       return {
         ...state,
-        users: action.payload,
+        cars: action.payload,
         loading: false,
       };
 
     case types.SET_CARS:
-      return { ...state, cars: action.payload };
+      return { ...state, cars: action.payload, loading: false };
+
+    case types.RESET_CAR:
+      return { ...state, car: null, loading: false };
 
     case types.DELETE_CAR:
       return {
         ...state,
+        car: null,
         loading: false,
       };
 

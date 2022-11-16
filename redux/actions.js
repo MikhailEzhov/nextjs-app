@@ -23,6 +23,12 @@ const carGeted = (car) => ({
   payload: car,
 });
 
+export const resetCar = () => {
+  return {
+    type: types.RESET_CAR,
+  };
+};
+
 export const setCars = (cars) => {
   return {
     type: types.SET_CARS,
@@ -71,7 +77,7 @@ export const getCar = (id) => {
       .get(`${process.env.API_URL}/${id}`)
       .then((res) => {
         dispatch(carGeted(res.data));
-        //console.log("res.data:", res.data);
+        // console.log("res.data:", res.data);
       })
       .catch((error) => console.log(error));
   };
