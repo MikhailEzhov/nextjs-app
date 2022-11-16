@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addCar } from "../redux/actions";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { setCars } from "../redux/actions";
 import { useForm } from "react-hook-form";
 import { Button } from "react-bootstrap";
 import styles from "../styles/Form.module.scss";
 
 const Form = ({ car, action }) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   const [currentСar, setCurrentCar] = useState(car);
   const [showSpecifications, setShowSpecifications] = useState(false);
 
@@ -42,6 +45,14 @@ const Form = ({ car, action }) => {
     setCurrentCar(newCurrentСar);
   };
 
+  const postCar = async () => {
+    const newCar = await dataTransformation(currentСar);
+    dispatch(addCar(newCar));
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1500);
+  };
+
   const dataTransformation = (currentСar) => {
     const car = {
       ...currentСar,
@@ -59,8 +70,7 @@ const Form = ({ car, action }) => {
 
   const onSubmit = () => {
     if (action === "create") {
-      const newCar = dataTransformation(currentСar);
-      console.log("onSubmit - action create:", newCar);
+      postCar();
     }
   };
 
@@ -69,7 +79,10 @@ const Form = ({ car, action }) => {
       <label>
         image url:
         <input
-          {...register("image", { required: true, pattern: /^https:\/\/(.*)/ })}
+          {...register("image", {
+            required: true,
+            pattern: /^https:\/\/(\S+)/,
+          })}
           type="text"
           value={currentСar.image || ""}
           onChange={(e) =>
