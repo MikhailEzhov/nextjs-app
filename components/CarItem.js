@@ -1,9 +1,23 @@
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { deleteCar } from "../redux/actions";
 import { Card, ListGroup, Button } from "react-bootstrap";
 
 const CarItem = ({ car, action }) => {
+  const dispatch = useDispatch();
   const router = useRouter();
+
+  const [showLoading, setShowLoading] = useState(false);
+
+  const removeCar = (id) => {
+    setShowLoading(true);
+    dispatch(deleteCar(id));
+    setTimeout(() => {
+      router.push("/");
+    }, 3000);
+  };
 
   return (
     <Card style={{ maxWidth: "20rem", margin: "0 auto" }}>
@@ -57,8 +71,12 @@ const CarItem = ({ car, action }) => {
 
         {action === "delete" && (
           <Link href={"/"} legacyBehavior>
-            <a className="btn btn-danger btn-sm" role="button">
-              Confirm deletion!
+            <a
+              className="btn btn-danger btn-sm"
+              role="button"
+              onClick={() => removeCar(car.id)}
+            >
+              {showLoading ? "LOADING..." : "Confirm deletion!"}
             </a>
           </Link>
         )}
