@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Form from "../../components/Form";
 import Layout from "../../components/Layout";
-import { getCar } from "../../redux/actions";
+import { getCar, resetCar } from "../../redux/actions";
 
 const Update = () => {
   const dispatch = useDispatch();
@@ -17,13 +17,20 @@ const Update = () => {
       return;
     }
     dispatch(getCar(id));
+    return () => {
+      dispatch(resetCar());
+    };
   }, [dispatch, id]);
 
   return (
     <Layout title={"Update car"}>
-      <h1>Update car</h1>
       {loading && <h2>Loading....</h2>}
-      {car && <Form car={car} action={"update"} />}
+      {car && (
+        <>
+          <h1>Update car</h1>
+          <Form car={car} action={"update"} />
+        </>
+      )}
     </Layout>
   );
 };

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { getCar } from "../../redux/actions";
+import { getCar, resetCar } from "../../redux/actions";
 import Layout from "../../components/Layout";
 import CarItem from "../../components/CarItem";
 
@@ -17,14 +17,20 @@ const Delete = () => {
       return;
     }
     dispatch(getCar(id));
+    return () => {
+      dispatch(resetCar());
+    };
   }, [dispatch, id]);
 
   return (
     <Layout title={"Delete car"}>
-      <h1>Delete car</h1>
-
       {loading && <h2>Loading....</h2>}
-      {car && <CarItem car={car} action={"delete"} />}
+      {car && (
+        <>
+          <h1>Delete car</h1>
+          <CarItem car={car} action={"delete"} />
+        </>
+      )}
     </Layout>
   );
 };
