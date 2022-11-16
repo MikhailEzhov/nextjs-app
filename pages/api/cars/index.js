@@ -7,9 +7,9 @@ export default function handler(request, response) {
     return response.status(200).json(cars);
   }
 
-  if (method === "POST") {
-    const { body } = request;
-    const newCars = cars.push(body);
-    return response.status(200).json(newCars);
-  }
+  // if (method === "POST") {
+  //   const { body } = request;
+  //   cars.push(body);
+  //   return response.status(200).json(cars);
+  // }
 }

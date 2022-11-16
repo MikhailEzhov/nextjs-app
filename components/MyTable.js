@@ -13,7 +13,7 @@ const MyTable = ({ cars, variant, children }) => {
               <td>
                 <Image
                   src={image}
-                  alt={image}
+                  alt={"https://"}
                   width={70}
                   height={70}
                   style={{ objectFit: "cover", borderRadius: "4px" }}
@@ -61,7 +61,7 @@ const MyTable = ({ cars, variant, children }) => {
             <td>
               <Image
                 src={image}
-                alt={image}
+                alt={"https://"}
                 width={70}
                 height={70}
                 style={{ objectFit: "cover", borderRadius: "4px" }}

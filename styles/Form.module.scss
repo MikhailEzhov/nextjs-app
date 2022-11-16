@@ -1,0 +1,20 @@
+.valid {
+  outline: invert;
+}
+
+.invalid {
+  outline-color: red;
+}
+
+.form {
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15px;
+  max-width: 320px;
+  margin: 0 auto;
+}

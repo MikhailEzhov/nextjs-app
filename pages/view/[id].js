@@ -1,6 +1,7 @@
-import Car from "../../components/Car";
 import Layout from "../../components/Layout";
+import CarItem from "../../components/CarItem";
 
+//SSR
 export const getServerSideProps = async (context) => {
   const { id } = context.params;
   const response = await fetch(`${process.env.API_URL}/${id}`);
@@ -19,8 +20,7 @@ const View = ({ car }) => {
   return (
     <Layout title={"View car information"}>
       <h1>View car information</h1>
-
-      <Car car={car} action={"view"} />
+      <CarItem car={car} action={"view"} />
     </Layout>
   );
 };

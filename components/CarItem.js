@@ -1,7 +1,10 @@
 import Link from "next/link";
-import { Card, ListGroup } from "react-bootstrap";
+import { useRouter } from "next/router";
+import { Card, ListGroup, Button } from "react-bootstrap";
 
-const Car = ({ car, action }) => {
+const CarItem = ({ car, action }) => {
+  const router = useRouter();
+
   return (
     <Card style={{ maxWidth: "20rem", margin: "0 auto" }}>
       <Card.Img variant="top" src={car.image} />
@@ -48,14 +51,14 @@ const Car = ({ car, action }) => {
       )}
 
       <Card.Body className="d-flex justify-content-center gap-3">
-        <Link href={"/"} legacyBehavior>
-          <a>go to home page</a>
-        </Link>
+        <Button size="sm" onClick={() => router.back()}>
+          Click here to go back
+        </Button>
 
         {action === "delete" && (
           <Link href={"/"} legacyBehavior>
             <a className="btn btn-danger btn-sm" role="button">
-              confirm deletion!
+              Confirm deletion!
             </a>
           </Link>
         )}
@@ -64,4 +67,4 @@ const Car = ({ car, action }) => {
   );
 };
 
-export default Car;
+export default CarItem;

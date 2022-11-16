@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Layout from "../components/Layout";
 import MyTable from "../components/MyTable";
 import SearchInputs from "../components/searchInputs";
+import { setCars } from "../redux/actions";
 
+// SSR
 export const getStaticProps = async () => {
   const response = await fetch(`${process.env.API_URL}`);
   const data = await response.json();
@@ -12,11 +15,13 @@ export const getStaticProps = async () => {
     };
   }
   return {
-    props: { cars: data },
+    props: { serverData: data },
   };
 };
 
-const Search = ({ cars }) => {
+const Search = ({ serverData }) => {
+  const dispatch = useDispatch();
+
   const [search, setSearch] = useState({
     brand: "",
     model: "",
@@ -27,6 +32,10 @@ const Search = ({ cars }) => {
     priceFrom: "",
     priceTo: "",
   });
+
+  useEffect(() => {
+    dispatch(setCars(visibleCars));
+  }, [search]);
 
   const filtration = (cars, search) => {
     const filteredCars = cars.filter(
@@ -46,16 +55,14 @@ const Search = ({ cars }) => {
     return filteredCars;
   };
 
-  const visibleCars = filtration(cars, search);
+  const visibleCars = filtration(serverData, search);
 
   return (
     <Layout title={"Сar search"}>
       <h1>Сar search</h1>
-      {cars && (
-        <MyTable cars={visibleCars} variant={"search"}>
-          <SearchInputs search={search} setSearch={setSearch} />
-        </MyTable>
-      )}
+      <MyTable cars={visibleCars} variant={"search"}>
+        <SearchInputs search={search} setSearch={setSearch} />
+      </MyTable>
     </Layout>
   );
 };

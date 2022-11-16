@@ -1,5 +1,5 @@
 import { Provider } from "react-redux";
-import { useStore } from "../store/store";
+import { useStore } from "../redux/store";
 import "../styles/globals.scss";
 import NextNprogress from "nextjs-progressbar";
 
