@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { addCar, updateCar } from "../redux/actions";
 import { useForm } from "react-hook-form";
@@ -11,9 +12,11 @@ import {
 
 const Form = ({ car, action }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [currentСar, setCurrentCar] = useState(car);
   const [showSpecifications, setShowSpecifications] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
     if (action === "update") {
@@ -41,20 +44,22 @@ const Form = ({ car, action }) => {
   };
 
   const postCar = async () => {
+    setShowLoading(true);
     const newCar = await transformationOnCreation(currentСar);
     dispatch(addCar(newCar));
     setTimeout(() => {
-      window.location.href = "/";
-    }, 1500);
+      router.push("/");
+    }, 3000);
   };
 
   const putCar = async () => {
+    setShowLoading(true);
     const newCar = await transformationOnUpdate(currentСar);
     const { id, ...car } = await newCar;
     dispatch(updateCar(car, id));
     setTimeout(() => {
-      window.location.href = "/";
-    }, 1500);
+      router.push("/");
+    }, 3000);
   };
 
   const onSubmit = () => {
@@ -133,7 +138,11 @@ const Form = ({ car, action }) => {
       </label>
 
       {!showSpecifications ? (
-        <Button size="sm" onClick={() => setShowSpecifications(true)}>
+        <Button
+          size="sm"
+          disabled={showLoading}
+          onClick={() => setShowSpecifications(true)}
+        >
           {action === "create" ? "add specifications" : "show specifications"}
         </Button>
       ) : (
@@ -247,11 +256,20 @@ const Form = ({ car, action }) => {
           );
         })}
 
-      <Button size="sm" onClick={() => addOption({ option_name: "" })}>
+      <Button
+        size="sm"
+        disabled={showLoading}
+        onClick={() => addOption({ option_name: "" })}
+      >
         add option
       </Button>
 
-      <input type="submit" className="btn btn-primary btn-sm" value="Submit" />
+      <input
+        type="submit"
+        className="btn btn-primary btn-sm"
+        disabled={showLoading}
+        value={showLoading ? "LOADING..." : "submit"}
+      />
     </form>
   );
 };
