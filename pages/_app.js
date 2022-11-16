@@ -9,10 +9,10 @@ function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <NextNprogress
-        color="white"
+        color="grey"
         startPosition={0.3}
         stopDelayMs={200}
-        height={3}
+        height={4}
         showOnShallow={true}
       />
       <Component {...pageProps} />
