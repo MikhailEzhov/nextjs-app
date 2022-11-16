@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addCar } from "../redux/actions";
-import { useRouter } from "next/router";
+import { addCar, updateCar } from "../redux/actions";
 import { useForm } from "react-hook-form";
 import { Button } from "react-bootstrap";
 import styles from "../styles/Form.module.scss";
+import {
+  transformationOnCreation,
+  transformationOnUpdate,
+} from "../utils/utils";
 
 const Form = ({ car, action }) => {
-  const router = useRouter();
   const dispatch = useDispatch();
 
   const [currentСar, setCurrentCar] = useState(car);
@@ -23,14 +25,7 @@ const Form = ({ car, action }) => {
     register,
     handleSubmit,
     formState: { errors },
-    unregister,
   } = useForm();
-
-  // useEffect(() => {
-  //   // if (action === "update") {
-  //   //   unregister(["image", "name", "description", "contacts"]);
-  //   // }
-  // }, []);
 
   const addOption = (obj) => {
     setCurrentCar({
@@ -46,31 +41,27 @@ const Form = ({ car, action }) => {
   };
 
   const postCar = async () => {
-    const newCar = await dataTransformation(currentСar);
+    const newCar = await transformationOnCreation(currentСar);
     dispatch(addCar(newCar));
     setTimeout(() => {
       window.location.href = "/";
     }, 1500);
   };
 
-  const dataTransformation = (currentСar) => {
-    const car = {
-      ...currentСar,
-      id: Date.now(),
-      price: +currentСar.price,
-      technical_characteristics: {
-        ...currentСar.technical_characteristics,
-        car_id: Date.now() + 1,
-        productionYear: +currentСar.technical_characteristics.productionYear,
-        mileage: +currentСar.technical_characteristics.mileage,
-      },
-    };
-    return car;
+  const putCar = async () => {
+    const newCar = await transformationOnUpdate(currentСar);
+    const { id, ...car } = await newCar;
+    dispatch(updateCar(car, id));
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1500);
   };
 
   const onSubmit = () => {
     if (action === "create") {
       postCar();
+    } else if (action === "update") {
+      putCar();
     }
   };
 
@@ -143,7 +134,7 @@ const Form = ({ car, action }) => {
 
       {!showSpecifications ? (
         <Button size="sm" onClick={() => setShowSpecifications(true)}>
-          add specifications
+          {action === "create" ? "add specifications" : "show specifications"}
         </Button>
       ) : (
         <>
