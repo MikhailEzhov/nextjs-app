@@ -40,8 +40,8 @@ export const loadCars = () => {
   return function (dispatch) {
     axios
       .get(`${process.env.API_URL}`)
-      .then((resp) => {
-        dispatch(getCars(resp.data));
+      .then((res) => {
+        dispatch(getCars(res.data));
       })
       .catch((error) => console.log(error));
   };
@@ -53,7 +53,6 @@ export const deleteCar = (id) => {
       .delete(`${process.env.API_URL}/${id}`)
       .then(() => {
         dispatch(carDeleted());
-        dispatch(loadCars());
       })
       .catch((error) => console.log(error));
   };
@@ -65,7 +64,6 @@ export const addCar = (car) => {
       .post(`${process.env.API_URL}`, car)
       .then(() => {
         dispatch(carAdded());
-        dispatch(loadCars());
       })
       .catch((error) => console.log(error));
   };
@@ -77,7 +75,6 @@ export const getCar = (id) => {
       .get(`${process.env.API_URL}/${id}`)
       .then((res) => {
         dispatch(carGeted(res.data));
-        // console.log("res.data:", res.data);
       })
       .catch((error) => console.log(error));
   };
