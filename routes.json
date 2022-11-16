@@ -1,0 +1,8 @@
+{
+  "/cars/": "/cars",
+  "/cars/search": "/cars",
+  "/cars/create": "/cars",
+  "/cars/view/:id": "/cars/:id",
+  "/cars/update/:id": "/cars/:id",
+  "/cars/delete/:id": "/cars/:id"
+}
